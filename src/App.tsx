@@ -11,13 +11,15 @@ const API = {
 };
 
 const App: FC = () => {
-  console.log("rendered");
+  console.log("rendered3");
 
   const [activeLink, setActiveLink] = useState<"posts" | "users">("posts");
-  const [posts, setPosts] = useState<PostModel[] | null>(null);
   const [users, setUsers] = useState<UserModel[] | null>(null);
+  const [posts, setPosts] = useState<PostModel[] | null>(null);
 
   useEffect(() => {
+    console.log(process.env.TEST);
+
     if (activeLink === "posts") {
       fetch(API.POSTS, {
         headers: { "Content-Type": "application/json" },
@@ -33,6 +35,14 @@ const App: FC = () => {
         .then((users) => setUsers(users))
         .catch((err) => console.log(err));
     }
+
+    const tst = process.env.MY_API;
+    console.log(tst);
+
+    fetch("http://localhost:4000/")
+      .then((data) => data.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
   }, [activeLink]);
 
   return (
@@ -42,7 +52,7 @@ const App: FC = () => {
           onClick={() => setActiveLink("posts")}
           className={activeLink === "posts" ? "active" : undefined}
         >
-          Posts
+          Post test
         </a>
         <a
           onClick={() => setActiveLink("users")}

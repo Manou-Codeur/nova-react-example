@@ -1,0 +1,5 @@
+run_tests:
+  image: node:latest
+  scripts:
+    - npm i
+    - npm run test
